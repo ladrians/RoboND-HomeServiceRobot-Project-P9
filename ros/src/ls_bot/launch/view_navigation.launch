@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf8"?>
+<launch>
+  <!-- View Navigation -->
+  <include file="$(find turtlebot_rviz_launchers)/launch/view_navigation.launch"/>
+</launch>

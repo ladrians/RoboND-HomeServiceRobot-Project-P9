@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf8"?>
 <launch>
     <!-- For visualising your robots map bulding in RVIZ -->
-    <arg name="rvizconfig" default="$(find wall_follower)/rviz/robot_slam.rviz" />
+    <arg name="rvizconfig" default="$(find ls_bot)/rviz/robot_slam.rviz" />
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
 </launch>

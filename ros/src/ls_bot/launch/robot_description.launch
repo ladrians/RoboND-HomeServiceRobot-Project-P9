@@ -6,7 +6,7 @@
   <arg name="gps" default="false"/>
 
   <!-- send urdf to param server -->
-  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find wall_follower)/urdf/sandbox_bot.xacro'
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find ls_bot)/urdf/sandbox_bot.xacro'
 robot_namespace:=$(arg robot_namespace)
 kinect:=$(arg kinect)
 camera:=$(arg camera)

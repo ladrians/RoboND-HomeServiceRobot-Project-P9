@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf8"?>
 <launch>
-  <arg name="teleop" default="false" />
-
+  <arg name="teleop" default="true" />
+  <!-- Rover teleoperation -->
   <group unless="$(arg teleop)">
     <!-- Steering using robot_steering rqt plugin -->
     <node name="steering" pkg="rqt_robot_steering" type="rqt_robot_steering" />
   </group>
   <group if="$(arg teleop)">
-    <!-- Rover teleoperation -->
-    <node name="teleop" pkg="wall_follower" type="teleop.py" output="screen">
+    <!--node name="teleop" pkg="ls_bot" type="teleop.py" output="screen">
       <remap from="teleop/cmd_vel" to="/cmd_vel"/>
-    </node>
+    </node-->
+    <include file="$(find turtlebot_teleop)/launch/keyboard_teleop.launch"/>
   </group>
 </launch>
