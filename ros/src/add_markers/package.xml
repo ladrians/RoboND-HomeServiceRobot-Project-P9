@@ -1,0 +1,13 @@
+<package>
+  <name>add_markers</name>
+  <version>0.1.0</version>
+  <description>add_markers</description>
+  <maintainer email="ladrians@gmail.com">Luciano Silveira</maintainer>
+  <license>BSD</license>
+  <author>Luciano Silveira</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+ 
+  <export>
+  </export>
+</package>
