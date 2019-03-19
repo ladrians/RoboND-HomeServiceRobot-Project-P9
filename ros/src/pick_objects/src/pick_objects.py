@@ -35,7 +35,7 @@ class GoToPose():
 	    # Start moving
         self.move_base.send_goal(goal)
 
-        success = self.move_base.wait_for_result() # rospy.Duration(60)
+        success = self.move_base.wait_for_result(rospy.Duration(60))
 
         state = self.move_base.get_state()
         result = False
