@@ -4,11 +4,15 @@
 Ideas taken from https://github.com/markwsilliman/turtlebot/blob/master/go_to_specific_point_on_map.py
 '''
 
+pick_topic = 'pick_flag'
+drop_topic = 'drop_flag'
+
 import rospy
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 import actionlib
 from actionlib_msgs.msg import *
 from geometry_msgs.msg import Pose, Point, Quaternion
+from std_msgs.msg import Bool
 
 class GoToPose():
     def __init__(self):
@@ -29,13 +33,13 @@ class GoToPose():
         goal = MoveBaseGoal()
         goal.target_pose.header.frame_id = 'map'
         goal.target_pose.header.stamp = rospy.Time.now()
-        goal.target_pose.pose = Pose(Point(pos['x'], pos['y'], 0.000),
-                                     Quaternion(quat['r1'], quat['r2'], quat['r3'], quat['r4']))
+        goal.target_pose.pose = Pose(Point(pos['x'], pos['y'], 0.000), Quaternion(quat['r1'], quat['r2'], quat['r3'], quat['r4']))
 
 	    # Start moving
+        duration = rospy.Duration(60)
         self.move_base.send_goal(goal)
 
-        success = self.move_base.wait_for_result(rospy.Duration(60))
+        success = self.move_base.wait_for_result(duration)
 
         state = self.move_base.get_state()
         result = False
@@ -60,11 +64,19 @@ class GoToPose():
 if __name__ == '__main__':
     try:
         rospy.init_node('pick_objects', anonymous=False)
+
+        pickup_publisher = rospy.Publisher(pick_topic, Bool, queue_size=1)
+        drop_publisher = rospy.Publisher(drop_topic, Bool, queue_size=1)
+
+        rospy.sleep(3)
+
+        marker = Bool()
+        marker.data = True
+        pickup_publisher.publish(marker)
         navigator = GoToPose()
 
-        position = {'x': -6.74, 'y' : 1.35}
         position = {'x': -6.44562959671, 'y' : 1.26055216789}
-        quaternion = {'r1' : 0.000, 'r2' : 0.000, 'r3' : 0.000, 'r4' : 1.000}
+        quaternion = {'r1' : 0., 'r2' : 0., 'r3' : 0., 'r4' : 1.}
 
         rospy.loginfo("Sending Pick Up Goal (%s, %s)", position['x'], position['y'])
 
@@ -72,16 +84,20 @@ if __name__ == '__main__':
 
         if pickup_zone_reached is True:
             rospy.loginfo("Reach pickup zone, waiting 5 seconds.")
+            marker.data = False
+            pickup_publisher.publish(marker)
         else:
             rospy.loginfo("Failed to reach pickup zone.")
             quit()
 
         rospy.sleep(5)
 
-        position = {'x': -6.9, 'y' : -5.99}
         position = {'x': 0.128987312317, 'y' : -1.71386241913}
 
         rospy.loginfo("Sending Drop-off Goal (%s, %s)", position['x'], position['y'])
+
+        marker.data = True
+        drop_publisher.publish(marker)
 
         dropoff_zone_reached = navigator.goto(position, quaternion)
 
