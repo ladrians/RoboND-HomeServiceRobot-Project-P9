@@ -1,0 +1,14 @@
+<package>
+  <name>pick_objects</name>
+  <version>0.1.0</version>
+  <description>pick_objects</description>
+  <maintainer email="ladrians@gmail.com">Luciano Silveira</maintainer>
+  <license>BSD</license>
+  <author>Luciano Silveira</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+ 
+  <export>
+
+  </export>
+</package>
