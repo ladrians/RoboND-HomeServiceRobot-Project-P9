@@ -7,7 +7,9 @@
   <author>Luciano Silveira</author>
 
   <buildtool_depend>catkin</buildtool_depend>
- 
+  <build_depend>rospy</build_depend>
+  <build_depend>visualization_msgs</build_depend>
+
   <export>
   </export>
 </package>
