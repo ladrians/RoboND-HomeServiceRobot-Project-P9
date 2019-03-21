@@ -37,7 +37,7 @@ Initially the U-shaped world was created with the Building Editor in Gazebo.
 
 ### Mapping
 
-The provided `teleoperation` utility was used to move the rover; the [steering plugin] (http://wiki.ros.org/rqt_robot_steering) from the rqt ROS utilities was tested and the `wall_follower` node generating a map. The result is the following map:
+The provided `teleoperation` utility was used to move the rover; the [steering plugin](http://wiki.ros.org/rqt_robot_steering) from the rqt ROS utilities was tested and the `wall_follower` node generating a map. The result is the following map:
 
 ![mapping step](./data/gmapping01.png)
 
@@ -84,6 +84,12 @@ $ rosrun add_markers add_markers.py
 [INFO] [1552959857.090800, 2475.324000]: Pick Up marker (-6.44562959671, 1.26055216789)
 [INFO] [1552959868.123470, 2485.325000]: Drop-off marker (0.128987312317, -1.71386241913)
 ```
+
+The following steps were followed:
+
+ * Publish the marker at the pickup zone and use Move Base to navigate.
+ * When the rover reaches the pickup zone, hide the marker and wait for 5 seconds.
+ * Publish the marker at the drop off zone and use Move Base to navigate.
 
 ### Home Service
 
@@ -147,3 +153,8 @@ In order to get a better localization, `ls_bot` used the Dynamic Window Approach
  * [SetupOnYourRobot withb rtabmap](http://wiki.ros.org/rtabmap_ros/Tutorials/SetupOnYourRobot)
  * [What is SLAM?](https://www.kudan.eu/kudan-news/an-introduction-to-slam/)
  * [Sending Simple Goals](http://wiki.ros.org/navigation/Tutorials/SendingSimpleGoals)
+ * [Udacity wall_follower](https://github.com/udacity/RoboND-PathPlanning/blob/master/wall_follower.cpp)
+ * [gmapping](http://wiki.ros.org/gmapping)
+ * [turtlebot_teleop](http://wiki.ros.org/turtlebot_teleop)
+ * [turtlebot_rviz_launchers](http://wiki.ros.org/turtlebot_rviz_launchers)
+ * [turtlebot_gazebo](http://wiki.ros.org/turtlebot_gazebo)
